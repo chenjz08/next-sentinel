@@ -1,0 +1,21 @@
+version = 1
+id = "automation-2"
+kind = "heartbeat"
+name = "监督目标会话 hooks 兜底"
+status = "PAUSED"
+rrule = "FREQ=MINUTELY;INTERVAL=1"
+target_thread_id = "replace-with-current-thread-id"
+prompt = """
+监督目标会话 `replace-with-target-session-id`，作为 hooks 未触发时的单次兜底。
+
+先恢复并检查目标会话状态；如果仍在运行，不发送任何内容。若目标会话已完成、可继续输入、或没有明确运行中状态，读取目标会话最近一次完成输出，从末尾向上寻找最后一个独立的 `NEXT: 继续`、`NEXT: 实现`、`NEXT: 修复`、`NEXT: 审查`、`NEXT: 发布`、`NEXT: 停止` 标识；不要求它是物理最后一行，并忽略 `NEXT: 继续/实现/修复/审查/发布/停止` 这种协议说明行。
+
+有标识就严格按标识发送固定消息；无标识才发送继续消息；`NEXT: 停止` 不发送。如果恢复状态是 `pending_init`，但本地会话历史能看到最近完成输出和明确 `NEXT:`，必须优先按最近 `NEXT:` 路由，不要直接降级为继续。本次兜底心跳处理完成后，将 `automation-2` 暂停，避免一次触发后保留每分钟轮询。
+
+继续消息只发送：
+继续
+
+实现或修复消息只发送 incremental-implementation 和 test-driven-development 两个技能引用。
+审查消息只发送 code-review-and-quality 技能引用。
+发布消息只发送 shipping-and-launch 技能引用。
+"""

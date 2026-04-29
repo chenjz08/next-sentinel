@@ -1,0 +1,10 @@
+{
+  "target_sessions": [
+    "replace-with-target-session-id"
+  ],
+  "target_cwds": [
+    "/absolute/path/to/your/project"
+  ],
+  "max_auto_continuations": 24,
+  "skill_root": "~/.codex/skills"
+}

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "writer": "cockpit",
+  "account_id": "replace-with-cockpit-account-id",
+  "email": "name@example.com",
+  "token_generation": 1,
+  "written_at": 1777440000
+}

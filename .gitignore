@@ -1,0 +1,9 @@
+.DS_Store
+build/
+dist/
+*.log
+*.pyc
+__pycache__/
+.next-router-state/
+NEXT_ROUTER_DISABLED
+.cockpit_codex_auth.json
